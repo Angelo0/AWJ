@@ -55,7 +55,7 @@ $('#myModal').on('show.bs.modal', function (event) {
 
 
 
- //  Produs
+ //  Resursa Produs
 
   $scope.produse = [];
   $scope.keys = [];
