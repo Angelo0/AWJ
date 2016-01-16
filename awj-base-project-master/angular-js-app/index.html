@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="blog">
 <head>
-  <title>My application</title>
+  <title>Aplicatia mea</title>
   <link rel="stylesheet" media="all" href="css/bootstrap.min.css">
   <link rel="stylesheet" media="all" href="css/custom.css">
 </head>
@@ -35,556 +35,387 @@
 
   <div class="container">
     <div ng-controller="HomeController">
-      <h1>{{ helloWorld }}</h1>
-      <p>Writing this live into the browser...</p>
+      <h1 ng-click="doStuff()">{{ helloWorld }}</h1>
     </div>
   </div>
 
   <hr/>
 
-  <!-- /resources1 -->
-  <div class="container">
-    <h1><a name="Persoana">Persoana</a></h1>
-    <h2>List all resources</h2>
-    <table class="table table-bordered ">
+  <!-- Persoana -->
+  <div class="container" ng-controller="HomeController">
+    <h1><a name ="Persoana">Persoana</a></h1>
+    <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>Nume</th>
-        <th>Prenume</th>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>John</td>
-        <td>MCcartney</td>
+      <tr ng-repeat="item in persoane.data" data-id="{{ item.id }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nume }}</td>
+        <td>{{ item.prenume }}</td>
+
         <td>
           <a href="">
-            <span class="label label-success">
+             <span data-toggle="modal" data-target="#myModal" class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+
+          <a href="#Edit">
+          <button ng-click="setUpdatePerson(item)" class="btn btn-info btn-xs">
               Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
+         </button>
           </a>
-          <a href="">
-            <span class="label label-danger">
+
+          <button ng-click="deletePersoana(item.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Paul</td>
-        <td>Blurt</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Dan</td>
-        <td>Bilzerian</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Editeaza o persoana</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume nou">
-          </div>
-           <div class="form-group">
-            <label for="attribute1">Prenume</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Prenume nou">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-4 col-md-offset-4">
-        <h2>Adauga a persoana</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Adauga un Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Adauga un Nume">
-          </div>
-           <div class="form-group">
-            <label for="attribute2">Prenume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Adauga un Prenume">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <hr/>
-
-  <!-- /resources2-->
-  <div class="container">
-    <h1><a name="Produs">Produs</a></h1>
-    <h2>List all resources</h2>
-    <table class="table table-bordered ">
+    <h2 align="right">Adauga o persoana</h2>
+    <table align="right">
       <tr>
-        <th>ID</th>
-        <th>Denumire</th>
-        <th>An fabricatie</th>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="person.id"/></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" class="form-control" ng-model="person.nume"/></td>
+      </tr>
+      <tr>
+        <td>Prenume</td>
+        <td><input type="text" class="form-control" ng-model="person.prenume"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addPersoana(person)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+    <a name="Edit">
+    <h2>Editeaza o persoana</h2></a>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editPerson.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editPerson.nume"></td>
+      </tr>
+      <tr>
+        <td>Prenume</td>
+        <td><input type="text" ng-model="editPerson.prenume"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updatePerson()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+
+
+    </div>
+
+     <!-- Produs -->
+  <div class="container" ng-controller="HomeController">
+    <h1><a name ="Produs">Produs</a></h1>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Produs1</td>
-        <td>1994</td>
+      <tr ng-repeat="item in produse.data" data-id="{{ item.id }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.denumire }}</td>
+        <td>{{ item.an }}</td>
+
         <td>
           <a href="">
-            <span class="label label-success">
+             <span data-toggle="modal" data-target="#myModal" class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+
+          <a href="#Edit">
+          <button ng-click="setUpdateProdus(item)" class="btn btn-info btn-xs">
               Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
+              <span  class="glyphicon glyphicon-edit"></span>
+          </button>
           </a>
-          <a href="">
-            <span class="label label-danger">
+
+          <button ng-click="deleteProdus(item.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Produs2</td>
-        <td>2007</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Produs3</td>
-        <td>2015</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Editeaza un produs</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Denumire</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Denumire noua">
-          </div>
-           <div class="form-group">
-            <label for="attribute3">Denumire</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="An de fabricatie nou">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-4 col-md-offset-4">
-        <h2>Adauga un produs</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Adauga un ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Denumire</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Adauga o Denumire">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">An de fabricatie</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Adauga un an de fabricatie">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <hr/>
-  <!-- /resources3-->
-   <div class="container">
-    <h1><a name="Student">Student</a></h1>
-    <h2>List all resources</h2>
-    <table class="table table-bordered ">
+    <h2 align="right">Adauga un produs</h2>
+    <table align="right">
       <tr>
-        <th>ID</th>
-      <th>Nume</th>
-      <th>An</th>
-      <th>Serie</th>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="produs.id"/></td>
+      </tr>
+      <tr>
+        <td>Denumire</td>
+        <td><input type="text" class="form-control" ng-model="produs.denumire"/></td>
+      </tr>
+      <tr>
+        <td>an</td>
+        <td><input type="text" class="form-control" ng-model="produs.an"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addProdus(produs)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+
+    <a name="Edit">
+    <h2>Editeaza un produs</h2></a>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editProdus.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editProdus.denumire"></td>
+      </tr>
+      <tr>
+        <td>Prenume</td>
+        <td><input type="text" ng-model="editProdus.an"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updateProdus()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+
+     <!-- Student -->
+  <div class="container" ng-controller="HomeController">
+    <h1><a name ="Student">Student</a></h1>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-      <td>Student1</td>
-      <td>2</td>
-      <td>322 CC</td>
+      <tr ng-repeat="item in studente.data" data-id="{{ item.id }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nume }}</td>
+        <td>{{ item.an }}</td>
+        <td>{{ item.serie }}</td>
+
         <td>
           <a href="">
-            <span class="label label-success">
+             <span data-toggle="modal" data-target="#myModal" class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+
+          <a href="#Edit">
+          <button ng-click="setUpdateStudent(item)" class="btn btn-info btn-xs">
               Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
+              <span  class="glyphicon glyphicon-edit"></span>
+          </button>
           </a>
-          <a href="">
-            <span class="label label-danger">
+
+          <button ng-click="deleteStudent(item.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-      <td>Student2</td> 
-      <td>1</td>
-      <td>313 AA</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-      <td>Student3</td>
-      <td>4</td>
-      <td>341 A</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Editeaza un student</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Anul</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="An nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Seria</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Serie noua">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-4 col-md-offset-4">
-        <h2>Adauga un student</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Adauga un ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Adauga un Nume">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Anul</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Adauga un An">
-          </div>
-           <div class="form-group">
-            <label for="attribute2">Seria</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Adauga o Serie">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <hr/>
-
-  <!-- /resources4-->
-   <div class="container">
-    <h1><a name="Medicament">Medicament</a></h1>
-    <h2>List all resources</h2>
-    <table class="table table-bordered ">
+    <h2 align="right">Adauga un student</h2>
+    <table align="right">
       <tr>
-        <th>ID</th>
-      <th>Denumire</th>
-      <th>Efect secundar</th>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="student.id"/></td>
+      </tr>
+       <tr>
+        <td>Nume</td>
+        <td><input type="text" class="form-control" ng-model="student.nume"/></td>
+      </tr>
+      <tr>
+        <td>AN</td>
+        <td><input type="text" class="form-control" ng-model="student.an"/></td>
+      </tr>
+      <tr>
+        <td>Serie</td>
+        <td><input type="text" class="form-control" ng-model="student.serie"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addStudent(student)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+
+    <a name="Edit">
+    <h2>Editeaza un student</h2></a>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editStudent.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editStudent.denumire"></td>
+      </tr>
+      <tr>
+        <td>An</td>
+        <td><input type="text" ng-model="editStudent.an"></td>
+      </tr>
+       <tr>
+        <td>Serie</td>
+        <td><input type="text" ng-model="editStudent.serie"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updateStudent()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+     <!-- Medicament -->
+  <div class="container" ng-controller="HomeController">
+    <h1><a name ="Medicament">Medicament</a></h1>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-      <td>Medicament1</td>
-      <td>Mancarime</td>
+      <tr ng-repeat="item in medicamente.data" data-id="{{ item.id }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.denumire }}</td>
+        <td>{{ item.efect }}</td>
+
         <td>
           <a href="">
-            <span class="label label-success">
+             <span data-toggle="modal" data-target="#myModal" class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+
+          <a href="#Edit">
+          <button ng-click="setUpdateMedicament(item)" class="btn btn-info btn-xs">
               Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
+              <span  class="glyphicon glyphicon-edit"></span>
+          </button>
           </a>
-          <a href="">
-            <span class="label label-danger">
+
+          <button ng-click="deleteMedicament(item.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-      <td>Medicament2</td> 
-      <td>Apetit scazut</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-      <td>Medicament3</td>
-      <td>greata</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Editeaza un medicament</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id nou">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Denumire</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Denumire noua">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Efect secundar</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Efect nou">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
+    <h2 align="right">Adauga un medicament</h2>
+    <table align="right">
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="medicament.id"/></td>
+      </tr>
+      <tr>
+        <td>Denumire</td>
+        <td><input type="text" class="form-control" ng-model="medicament.denumire"/></td>
+      </tr>
+      <tr>
+        <td>Efect</td>
+        <td><input type="text" class="form-control" ng-model="medicament.an"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addMedicament(medicament)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+
+    <a name="Edit">
+    <h2>Editeaza un medicament</h2></a>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editMedicament.id"></td>
+      </tr>
+      <tr>
+        <td>Denumire</td>
+        <td><input type="text" ng-model="editMedicament.denumire"></td>
+      </tr>
+      <tr>
+        <td>Efect</td>
+        <td><input type="text" ng-model="editMedicament.efect"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updateProdus()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+<div class="modal fade" tabindex="-1" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Medicament</h4>
       </div>
-
-
-      <div class="col-md-4 col-md-offset-4">
-        <h2>Adauga un medicament</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Adauga un Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Denumire</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Adauga o Denumire">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Efect secundar</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Adauga un efect">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
+      <div class="modal-body">
+        <td>{{ medicament.id }}</td>
+        <td>{{ medicament.denumire }}</td>
+        <td>{{ medicament.efect }}</td>
       </div>
-    </div>
-  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+ 
 
-  <hr/>
+
+
+
 
   <div class="container">
     <footer class="footer">
       <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>
-      <p class="text-muted pull-right">Grama Andrei, 332AA</p>
+      <p class="text-muted pull-right">Grama Andrei 332AA</p>
     </footer>
   </div>
 
