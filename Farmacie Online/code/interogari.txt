@@ -1,0 +1,56 @@
+1.Afisati medicamentul si efectul sau secundar
+SELECT A.Denumire, A.Producator, A.Mod_administrare, A.Stoc, A.Pret , B.Efect FROM `Medicament` A INNER JOIN `Efec_secundar` B ON (A.id_efect=B.id_efect)
+
+2. Afisati numele,prenumele clientului si plata sa din factura
+SELECT A.Nume, A.Prenume, B.Plata FROM `Client` A INNER JOIN `Factura` B ON (A.id_client = B.id_client)
+
+3.Afisati clientii ce au reteta eliberata in 2016
+SELECT A.Nume, A.Prenume,A.Sex,A.varsta, A.Greutate, B.data_eliberarii FROM `Client` A INNER JOIN `Reteta` B ON (A.id_client = B.id_client) WHERE B.data_eliberarii > '2016-1-1'
+
+4.Afisati numele, prenumele clientului si diagnosticul 
+SELECT A.Nume, A.Prenume, B.diagnostic FROM `Client` A INNER JOIN `Reteta` B ON (A.id_client = B.id_client)
+
+
+5.Afisati numele medicamentului si numele efectului secundar ce incepe cu 'a'
+
+SELECT A.Denumire, B.efect FROM `Medicament` A INNER JOIN `Efec_secundar` B ON(A.id_efect = B.id_efect) WHERE Efect LIKE 'a%'
+
+6.Afisati Clientii ce au de plata mai mult de 40 de lei
+SELECT A.Nume, A.Prenume, B.Plata FROM `Client` A INNER JOIN `Factura` B ON (A.id_client = B.id_client) WHERE B.plata > 40
+
+7.Afisati medicamentele pentru fiecare reteta si diagnosticul acesteia pentru medicamente care incep cu litera ...
+
+SELECT A.diagnostic, C.Denumire  
+FROM `Reteta` A INNER JOIN `Medicament/Reteta` B 
+ON(A.id_reteta = B.id_reteta) INNER JOIN `Medicament` C 
+ON (B.id_med = C.id_med) WHERE C.Denumire =(
+	SELECT Denumire FROM `Medicament` 
+	WHERE id_med = C.id_med AND Denumire LIKE '$n%')
+
+
+8. Afisati numele, prenumele clientilor, data de eliberare a retetei si data facturarii unde data facturarii este dupa ...
+
+SELECT A.Nume, A.Prenume, B.data_eliberarii, C.data 
+FROM `Client` A INNER JOIN `Reteta` B 
+ON (A.id_client = B.id_client) INNER JOIN `Factura` C 
+ON (B.id_client = C.id_client) WHERE C.data = (
+	SELECT data FROM `Factura` 
+	WHERE id_client = C.id_client AND data > '$n') 
+
+9.Sa se afiseze numele clientului si efectul secundar din reteta acestuia a carui nume incepe cu ...
+
+SELECT A.Nume, A.Prenume, E.Efect 
+FROM `Client` A INNER JOIN `Reteta` B 
+ON (A.id_client = B.id_client) INNER JOIN `Medicament/Reteta` C 
+ON ( B.id_reteta = C.id_reteta) INNER JOIN `Medicament` D 
+ON (C.id_med = D.id_med) INNER JOIN `Efec_secundar` E 
+ON (D.id_efect = E.id_efect) 
+WHERE E.Efect = ( 
+	SELECT Efect FROM `Efec_secundar` 
+	WHERE id_efect = E.id_efect AND Efect LIKE 'n%')
+
+10.Afiseaza retetele cu medicamentele ce au pretul intre .. si ... de lei
+
+
+SELECT A.id_reteta , M.Denumire, M.Pret FROM `Reteta` A INNER JOIN
+(SELECT B.id_reteta, C.Denumire, C.Pret FROM `Medicament/Reteta` B INNER JOIN `Medicament` C ON (B.id_med = C.id_med) WHERE C.Pret BETWEEN ... and ...) AS M ON A.id_reteta = M.id_reteta

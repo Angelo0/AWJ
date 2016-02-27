@@ -1,0 +1,108 @@
+html {
+    margin: 0;
+    padding: 0;
+} 
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+
+h1
+{
+	padding-left: 25px;
+	font-weight: bold;
+	font-size: 24px;
+	color: #FF0000;
+}
+
+#meniu ul
+{
+	list-style-type: none;
+	margin: 3px;
+	padding: 0;
+}
+
+#meniu li
+{
+	float: none;
+	display: block;
+	display: inline;
+	padding-right: 1px;
+}
+
+#meniu a
+{
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	font-family: "Comic Sans MS";
+	font-size: 17px;
+	width: auto;
+	height: auto;
+	color: #FFFFFF;
+	background: url(imagini/meniu_principal2.png); 
+	padding: 0px 20px 0px 20px;
+	line-height: 50px;
+}
+
+#meniu a:hover
+{
+	background: url(imagini/meniu_principal3.png);
+}
+
+ <!--Meniu inventii si inventatori-->
+
+#meniu2 
+{
+	font-size:16;
+	width: 150px;
+}
+
+#meniu2 ul
+{
+	margin: 0; 
+	padding: 0;
+	background-image:url(imagini/meniu.png);
+}
+
+#meniu2 li
+{
+	list-style: none;
+	background-image:url(imagini/meniu.png);
+	font-weight: bold;
+}
+
+#meniu2 a
+{
+	color: #FFFFFF;
+	display: block;
+	height: 45px;
+	line-height: 36px;
+	padding-left: 10px;
+	text-decoration: none;
+	width: 175px;
+}
+
+#meniu2 a:hover
+{
+	background-image: url(imagini/meniu2.png);
+}
+
+#timeline a
+{
+	text-decoration: none;
+	color: #0CD21B;
+	display:block;
+	width: 10px;
+	height: 30px;
+	background-image:url(imagini/timeline1.png);
+}
+
+#timeline a:hover
+{
+	background-image:url(imagini/timeline2.png);
+	color: #FF0000;
+}
+</style>

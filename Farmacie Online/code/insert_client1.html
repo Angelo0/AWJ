@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>    
+<head>
+	<title>Insert</title>
+</head>
+<body>
+<div class="container">
+<!--Creez doar o linie de tabel -->
+<table class = "table table-bordered">
+<tr>
+<!--Creez un formular pentru fiecare atribut al medicamentului, 
+inafara de cheia primara (ID) -->
+<form class="form-inline" action ="insert_client2.php" method="POST">
+ <td>
+ <div class="form-group">
+    <label>Nume</label>
+    <input type="text" class="form-control" name="nume" > 
+  </div></td>
+
+  <td>
+  <div class="form-group">
+    <label>Prenume</label>
+    <input type="text" class="form-control" name="prenume">
+  </div></td>
+
+   <td>
+  <div class="form-group">
+    <label>Sex</label>
+    <input type="text" class="form-control" name="sex">
+  </div></td>
+
+    <td>
+  <div class="form-group">
+    <label>Varsta</label>
+    <input type="text" class="form-control" name="varsta">
+  </div></td>
+
+    <td>
+  <div class="form-group">
+    <label>Greutate</label>
+    <input type="text" class="form-control" name="greutate">
+  </div></td>
+
+  <td><button type="submit" class="btn btn-default">Trimite</button></td>
+
+</form>
+</tr></table></div>
+</body>
+</html>
